@@ -1,0 +1,102 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Sample Python API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users/{user_id}": {
+      "get": {
+        "summary": "Get User",
+        "operationId": "get_user_users__user_id__get",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/": {
+      "post": {
+        "summary": "Create User",
+        "operationId": "create_user_users__post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/User" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/items/": {
+      "get": {
+        "summary": "Get Items",
+        "operationId": "get_items_items__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Item" },
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "properties": {
+          "id": { "title": "Id", "type": "integer" },
+          "username": { "title": "Username", "type": "string" },
+          "email": { "title": "Email", "type": "string" },
+          "is_active": { "default": true, "title": "Is Active", "type": "boolean" }
+        },
+        "required": ["id", "username", "email"],
+        "title": "User",
+        "type": "object"
+      },
+      "Item": {
+        "properties": {
+          "id": { "title": "Id", "type": "integer" },
+          "name": { "title": "Name", "type": "string" },
+          "price": { "title": "Price", "type": "number" },
+          "description": { "anyOf": [{ "type": "string" }, { "type": "null" }], "default": null, "title": "Description" }
+        },
+        "required": ["id", "name", "price"],
+        "title": "Item",
+        "type": "object"
+      }
+    }
+  }
+}

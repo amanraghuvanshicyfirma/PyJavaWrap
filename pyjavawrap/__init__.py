@@ -1,0 +1,1 @@
+# PyJavaWrap Package Initializer
